@@ -1,0 +1,227 @@
+:root {
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --bg-input: #2c2c2c;
+    --text-main: #e0e0e0;
+    --text-dim: #a0a0a0;
+    --accent: #3c8dc4;
+    --accent-hover: #1b456b;
+    --accent-secondary: #03dac6;
+    --danger: #cf6679;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.contact-item {
+    background: var(--bg-card);
+    margin-bottom: 16px;
+    padding: 18px 24px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.contact-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+.contact-item b {
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.loader-container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.loader-text {
+    font-size: 2rem;
+    color: var(--accent);
+    text-shadow: 0 0 15px rgba(187, 134, 252, 0.4);
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid #444;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.contactInfo label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text-dim);
+    letter-spacing: 0.8px;
+}
+
+input {
+    background: var(--bg-input);
+    border: 1px solid #444;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-secondary);
+    background: #333;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-add-main {
+    background: linear-gradient(135deg, var(--accent), #5fb7ff);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+    margin-top: 20px;
+}
+
+.btn-add-main:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(53, 255, 255, 0.5);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-save {
+    flex: 2;
+    background: linear-gradient(135deg, var(--accent-secondary), #01a395);
+    color: #002b27;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(3, 218, 198, 0.2);
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 18px rgba(3, 218, 198, 0.4);
+}
+
+.btn-cancel {
+    flex: 1;
+    background: transparent;
+    color: var(--text-dim);
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #444;
+    font-weight: 600;
+}
+
+.btn-cancel:hover {
+    background: rgba(207, 102, 121, 0.1);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.btn-delete-main {
+    background: rgba(207, 102, 121, 0.1);
+    color: var(--danger);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.btn-delete-main:hover {
+    background: var(--danger);
+    color: var(--bg-dark);
+    box-shadow: 0 0 12px rgba(207, 102, 121, 0.4);
+    transform: scale(1.05);
+}
+
+.contact-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 15px;
+    align-items: center;
+}
+
+button:active {
+    transform: scale(0.96);
+}
