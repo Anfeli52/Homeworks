@@ -1,13 +1,15 @@
-import type Estudiante from "./Estudiante";
-
 class Node {
-    value: Estudiante;
-    next: Node | null = null;
 
-    constructor(value: Estudiante){
+    value: any;
+    next: Node | null = null;
+    prev: Node | null = null;
+
+    constructor(value: any){
         this.value = value;
         this.next = null;
+        this.prev = null;
     }
+
 }
 
 export default Node;
