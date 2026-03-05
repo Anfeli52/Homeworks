@@ -1,7 +1,6 @@
 import Node from "./Node";
 
-class LinkedList {
-
+class LinkedList{
     head: Node | null;
     tail: Node | null;
 
@@ -10,19 +9,19 @@ class LinkedList {
         this.tail = null;
     }
 
-    add(value: any): void{
+    add(value: any):void{
         const node = new Node(value);
         if(!this.head){
             this.head = node;
             this.tail = node;
-            return
+            return;
         }
-        
+
         this.tail!.next = node;
         node.prev = this.tail;
         this.tail = node;
     }
-}
 
+}
 
 export default LinkedList;

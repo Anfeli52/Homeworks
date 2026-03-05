@@ -1,0 +1,92 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  
+}
+
+.vehicle-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  height: 100vh;
+  background: linear-gradient(135deg, #2784ee 0%, #1b6ed6 100%);
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #222;
+}
+
+.vehicle-info, .vehicle-historial, .vehicule-auto-rotate, .vehicule-auto-rotate{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  min-width: 200px;
+  margin: 0 10px;
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  background: rgb(100, 224, 255);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  width: 250px;
+  min-height: 200px;
+  text-align: center;
+  gap: 8px;
+}
+
+.info span{
+  display: block;
+  margin-bottom: 4px;
+}
+
+.info span:last-child{
+  margin-bottom: 0;
+}
+
+.info:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  transform: translateY(-4px);
+}
+
+.empty-message {
+  font-style: italic;
+  color: #333;
+  margin: 0;
+}
+.action-buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+}
+
+.action-buttons button{
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.action-buttons button:hover {
+  transform: translateY(-2px);
+  background-color: rgba(0,0,0,0.1);
+}
+
+.action-buttons .next{
+  background: #58e058;
+  color: white;
+}
+
+.action-buttons .next:hover {
+  background: #4caf4c;
+}
