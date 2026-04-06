@@ -1,0 +1,175 @@
+@use 'sass:color';
+
+$color-bg: #f1faee;
+$color-primary: #1d3557;
+$color-secondary: #457b9d;
+$color-accent: #e63946;
+$color-white: #ffffff;
+$color-muted: rgba(69, 123, 157, 0.65);
+$color-border: rgba(29, 53, 87, 0.12);
+
+@mixin transition-fast {
+    transition: border-color 160ms ease, box-shadow 160ms ease,
+        background-color 160ms ease, transform 160ms ease, opacity 160ms ease;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(29, 53, 87, 0.58);
+    backdrop-filter: blur(6px);
+    animation: modal-fade-in 160ms ease-out;
+
+    .modal-content {
+        width: min(100%, 520px);
+        max-height: min(90vh, 760px);
+        overflow: auto;
+        padding: 1.5rem;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.36);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 250, 238, 0.98) 100%);
+        box-shadow: 0 30px 70px rgba($color-primary, 0.28);
+        color: $color-primary;
+        animation: modal-slide-up 180ms ease-out;
+
+        h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.01em;
+            color: $color-primary;
+        }
+
+        p {
+            margin: 0.75rem 0 1rem;
+            color: $color-muted;
+            line-height: 1.5;
+        }
+
+        form,
+        .modal-task-details {
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            color: $color-primary;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            min-height: 48px;
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            border: 1px solid rgba(69, 123, 157, 0.22);
+            background-color: $color-white;
+            color: $color-primary;
+            font: inherit;
+            outline: none;
+            @include transition-fast;
+
+            &::placeholder {
+                color: $color-muted;
+            }
+
+            &:focus {
+                border-color: $color-secondary;
+                box-shadow: 0 0 0 4px rgba(69, 123, 157, 0.14);
+            }
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input[readonly] {
+            background-color: rgba(69, 123, 157, 0.06);
+            color: rgba(29, 53, 87, 0.78);
+            cursor: default;
+        }
+
+        button {
+            min-height: 48px;
+            border: none;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            @include transition-fast;
+        }
+
+        form button[type='submit'] {
+            margin-top: 0.25rem;
+            background-color: $color-primary;
+            color: $color-bg;
+            box-shadow: 0 14px 28px rgba($color-primary, 0.18);
+
+            &:hover {
+                background-color: $color-secondary;
+                box-shadow: 0 16px 34px rgba($color-secondary, 0.24);
+                transform: translateY(-1px);
+            }
+        }
+
+        .modal-close {
+            width: 100%;
+            margin-top: 0.85rem;
+            border: 1px solid $color-border;
+            background-color: rgba(69, 123, 157, 0.08);
+            color: $color-primary;
+
+            &:hover {
+                border-color: rgba(69, 123, 157, 0.38);
+                background-color: rgba(69, 123, 157, 0.14);
+                transform: translateY(-1px);
+            }
+        }
+    }
+}
+
+@keyframes modal-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modal-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 640px) {
+    .modal {
+        padding: 0.75rem;
+
+        .modal-content {
+            width: 100%;
+            padding: 1.2rem;
+            border-radius: 20px;
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}

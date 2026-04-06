@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext'
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { PublicRoute } from './components/PublicRoute';
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
 import { TaskProvider } from './context/TaskContext';
@@ -16,8 +17,10 @@ function App() {
             <Navbar />
 
             <Routes>
-              <Route path='/login' element={<LoginPage />}></Route>
-              <Route path='/register' element={<RegisterPage />}></Route>
+              <Route element={<PublicRoute />}>
+                <Route path='/login' element={<LoginPage />}></Route>
+                <Route path='/register' element={<RegisterPage />}></Route>
+              </Route>
               
               <Route element={<ProtectedRoute />}>
                 <Route path='/home' element={<Home />}></Route>

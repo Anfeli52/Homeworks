@@ -89,8 +89,10 @@ $color-border: rgba(29, 53, 87, 0.12);
         position: relative;
         z-index: 1;
         display: grid;
+        grid-template-rows: auto 1fr auto;
         gap: 0.9rem;
         align-content: start;
+        height: 100%;
         padding: 1.3rem;
         border-radius: 20px;
         background-color: $color-white;
@@ -110,6 +112,8 @@ $color-border: rgba(29, 53, 87, 0.12);
                 $color-white 0%,
                 rgba(168, 218, 220, 0.24) 100%
             );
+            opacity: 0.72;
+            filter: saturate(0.82);
         }
 
         .home-card-title {
@@ -122,6 +126,14 @@ $color-border: rgba(29, 53, 87, 0.12);
             font-size: 0.98rem;
             line-height: 1.5;
             color: $color-muted;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            hyphens: auto;
         }
 
         .home-card-actions {
@@ -160,6 +172,40 @@ $color-border: rgba(29, 53, 87, 0.12);
 
                 &:focus-visible {
                     outline: 3px solid rgba(168, 218, 220, 0.9);
+                    outline-offset: 2px;
+                }
+            }
+
+            .home-card-delete {
+                width: 44px;
+                height: 44px;
+                flex-shrink: 0;
+                display: grid;
+                place-items: center;
+                border-radius: 12px;
+                border: 1px solid rgba(230, 57, 70, 0.34);
+                background-color: rgba(230, 57, 70, 0.08);
+                color: $color-accent;
+                cursor: pointer;
+                @include transition-fast;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: none;
+                    stroke: currentColor;
+                    stroke-width: 1.8;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                }
+
+                &:hover {
+                    background-color: rgba(230, 57, 70, 0.18);
+                    border-color: rgba(230, 57, 70, 0.52);
+                }
+
+                &:focus-visible {
+                    outline: 3px solid rgba(230, 57, 70, 0.26);
                     outline-offset: 2px;
                 }
             }

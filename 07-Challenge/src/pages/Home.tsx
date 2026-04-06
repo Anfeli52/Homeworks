@@ -4,6 +4,7 @@ import { useTask } from '../context/TaskContext';
 import { ModalNewTask } from '../components/ModalNewTask';
 import { ModalEditTask } from '../components/ModalEditTask';
 import type { Task } from '../context/TaskContext';
+import { useAuth } from '../context/AuthContext';
 
 export const Home = () => {
 
@@ -11,12 +12,11 @@ export const Home = () => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [editingTaskId, setEditingTaskId] = useState<Task | null>(null);
 
-    const { result: tasks, getTasks, isPending, error, updateTask } = useTask();
+    const { result: tasks, getTasks, isPending, error, updateTask, deleteTask } = useTask();
+    const { user } = useAuth();
 
     useEffect(() => {
-        getTasks();
-        // Se ejecuta solo al montar para cargar tareas iniciales.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        getTasks(user ? [{ field: "user_id", op: "==", value: user.uid }] : []);
     }, []);
 
     const toggleTaskStatus = async (taskId: string, completed: boolean) => {
@@ -24,6 +24,17 @@ export const Home = () => {
             await updateTask(taskId, { completed: !completed });
         } catch (error) {
             console.error("Error al actualizar el estado de la tarea:", error);
+        }
+    }
+
+    const handleDeleteTask = async (taskId: string) => {
+        const confirmed = window.confirm("¿Estás seguro de que quieres eliminar esta tarea?");
+        if (!confirmed) return;
+
+        try {
+            await deleteTask(taskId);
+        } catch (error) {
+            console.error("Error al eliminar la tarea:", error);
         }
     }
 
@@ -49,6 +60,15 @@ export const Home = () => {
                                 <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
                                     <path d="M16.86 3.56a2.2 2.2 0 0 1 3.12 0l.46.46a2.2 2.2 0 0 1 0 3.12l-9.98 9.98a1 1 0 0 1-.42.25l-4.05 1.1a.8.8 0 0 1-.98-.98l1.1-4.05a1 1 0 0 1 .25-.42z"></path>
                                     <path d="M14.7 5.7l3.6 3.6"></path>
+                                </svg>
+                            </button>
+                            <button className="home-card-delete" aria-label="Eliminar tarea" title="Eliminar tarea" onClick={() => handleDeleteTask(task.id)}>
+                                <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                                    <path d="M4 7h16"></path>
+                                    <path d="M10 11v6"></path>
+                                    <path d="M14 11v6"></path>
+                                    <path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"></path>
+                                    <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
                                 </svg>
                             </button>
                             <button className="home-card-button" onClick={() => toggleTaskStatus(task.id, task.completed)}>

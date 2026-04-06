@@ -45,7 +45,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
                 ...data,
                 createdAt: serverTimestamp(),
             });
-            await getTasks();
+            await getTasks([{ field: "user_id", op: "==", value: data.user_id }]);
         } catch (error) {
             setError("Error al crear la tarea");
         } finally {

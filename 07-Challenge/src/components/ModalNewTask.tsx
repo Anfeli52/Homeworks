@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import { useTask } from "../context/TaskContext";
+import "../styles/modal.scss";
 
 interface ModalNewTaskProps {
     onClose: () => void;
@@ -21,6 +22,11 @@ export const ModalNewTask = ({ onClose }: ModalNewTaskProps) => {
         if (!user) {
             alert("Debes estar logueado para crear una tarea.");
             navigate('/login');
+            return;
+        }
+
+        if (title.trim() === "" || description.trim() === "") {
+            alert("El título y la descripción de la tarea son obligatorios.");
             return;
         }
 
