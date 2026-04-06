@@ -40,6 +40,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const register = async(credentials: UserCredentials) => {
         try {
             await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
+            signOut(auth);
+            navigate('/login');
         } catch (error) {
             throw error;
         }

@@ -2,11 +2,12 @@ import { addDoc, collection, deleteDoc, doc, getDocs, query, serverTimestamp, up
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { db } from "../firebase/credentials";
 
-interface Task {
+export interface Task {
     id: string;
+    user_id: string;
     title: string;
-    body: string;
-    status: boolean;
+    description: string;
+    completed: boolean;
 }
 
 interface Filter {
@@ -25,7 +26,7 @@ interface TaskContextType {
     createTask: (data: CreateTaskInput) => Promise<void>;
     deleteTask: (id: string) => Promise<boolean>;
     updateTask: (id: string, data: UpdateTaskInput) => Promise<boolean>;
-    getTasks: () => Promise<Task[]>;
+    getTasks: (filters?: Filter[]) => Promise<Task[]>;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -44,6 +45,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
                 ...data,
                 createdAt: serverTimestamp(),
             });
+            await getTasks();
         } catch (error) {
             setError("Error al crear la tarea");
         } finally {
@@ -99,7 +101,15 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
             }
 
             const snapshot = await getDocs(queryFirebase);
-            const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Task[];
+            const docs = snapshot.docs.map((docItem) => {
+                const data = docItem.data() as Partial<Task> & { body?: string; status?: boolean };
+                return {
+                    id: docItem.id,
+                    title: data.title ?? "",
+                    description: data.description ?? data.body ?? "",
+                    completed: data.completed ?? data.status ?? false,
+                };
+            }) as Task[];
             setResult(docs);
             return docs;
         } catch (error) {
