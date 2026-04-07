@@ -114,6 +114,35 @@ body {
 			line-height: 1.5;
 		}
 
+		.alert.alert-danger {
+		position: relative;
+		z-index: 1;
+		margin-bottom: 1rem;
+		padding: 0.9rem 1rem;
+		border-radius: 14px;
+		border: 1px solid rgba(230, 57, 70, 0.35);
+		background-color: rgba(230, 57, 70, 0.08);
+		color: $color-accent;
+		font-size: 0.95rem;
+		font-weight: 700;
+		line-height: 1.45;
+	}
+
+	.alert.alert-danger::before {
+		content: 'Error';
+		display: inline-block;
+		margin-right: 0.5rem;
+		padding: 0.15rem 0.55rem;
+		border-radius: 999px;
+		background-color: $color-accent;
+		color: $color-white;
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		vertical-align: middle;
+	}
+
 		.auth-form {
 			position: relative;
 			z-index: 1;

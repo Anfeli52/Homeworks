@@ -81,8 +81,8 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
             });
             setResult(prev => prev.map(task => task.id === id ? { ...task, ...data } : task));
             return true;
-        } catch (error: any) {
-            setError(error.message || "Error al actualizar la tarea");
+        } catch (error) {
+            setError("Error al actualizar la tarea");
             return false;
         } finally {
             setIsPending(false);

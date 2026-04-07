@@ -1,7 +1,8 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, type User } from "firebase/auth";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { auth } from "../firebase/credentials";
+import { auth, db } from "../firebase/credentials";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
 
 interface UserCredentials {
     email: string,
@@ -38,12 +39,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const register = async(credentials: UserCredentials) => {
+        const usersRef = doc(db, "users", credentials.email);
+        const snapshot = await getDoc(usersRef);
+
+        if (snapshot.exists()) {
+            throw new Error("Este correo ya está registrado en la base de datos.");
+        }
+
         try {
             await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
             signOut(auth);
             navigate('/login');
-        } catch (error) {
-            throw error;
+        } catch (error: any) {
+            switch (error?.code) {
+                case "auth/email-already-in-use":
+                    throw new Error("Este correo ya está registrado.");
+                case "auth/invalid-email":
+                    throw new Error("El correo ingresado no es válido.");
+                case "auth/weak-password":
+                    throw new Error("La contraseña debe tener al menos 6 caracteres.");
+                default:
+                    throw new Error(error?.message || "No se pudo completar el registro.");
+            }
         }
     };
 
