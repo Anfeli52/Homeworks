@@ -1,0 +1,122 @@
+//DISEÑO HECHO CON INTELIGENCIA ARTIFICIAL
+
+
+@use "./variables" as *;
+
+.explorer-page {
+    padding: $space-xl;
+}
+
+.explorer-title {
+    margin-bottom: $space-lg;
+}
+
+.explorer-breadcrumb {
+    margin-bottom: $space-lg;
+    background: $color-surface;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: $radius-md;
+    padding: $space-sm $space-md;
+}
+
+.explorer-breadcrumb__label {
+    color: $color-muted;
+    font-size: 0.9rem;
+}
+
+.explorer-breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-xs;
+}
+
+.explorer-breadcrumb__separator {
+    color: $color-muted;
+}
+
+.explorer-breadcrumb__button {
+    border: 0;
+    background: transparent;
+    color: $color-muted;
+    cursor: pointer;
+    padding: 0;
+}
+
+.explorer-breadcrumb__button.is-current {
+    color: $color-primary;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.explorer-form {
+    margin-bottom: $space-lg;
+    display: flex;
+    gap: $space-sm;
+    flex-wrap: wrap;
+}
+
+.explorer-select,
+.explorer-input {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: $radius-sm;
+    background: $color-bg;
+    color: $color-text;
+    padding: 0.65rem 0.75rem;
+}
+
+.explorer-input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.explorer-content-title {
+    margin-bottom: $space-sm;
+}
+
+.tree-node {
+    margin-left: $space-md;
+}
+
+.tree-node__row {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    margin: 0.2rem 0;
+    padding: 0.32rem 0.55rem;
+    border-radius: $radius-sm;
+}
+
+.tree-node__row.is-directory {
+    cursor: pointer;
+}
+
+.tree-node__row.is-current {
+    background: $color-surface;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tree-node__name {
+    font-weight: 600;
+}
+
+.tree-node__children {
+    margin-left: $space-md;
+    border-left: 1px solid rgba(90, 99, 98, 0.35);
+    padding-left: $space-sm;
+}
+
+@media (max-width: 640px) {
+    .explorer-page {
+        padding: $space-md;
+    }
+
+    .explorer-form {
+        flex-direction: column;
+    }
+
+    .explorer-select,
+    .explorer-input,
+    .btn {
+        width: 100%;
+    }
+}

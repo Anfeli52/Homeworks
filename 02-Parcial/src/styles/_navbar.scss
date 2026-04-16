@@ -1,0 +1,39 @@
+//DISEÑO HECHO CON INTELIGENCIA ARTIFICIAL
+
+
+@use "./variables" as *;
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-md;
+    padding: $space-md $space-xl;
+    background: $color-primary;
+    color: $color-bg;
+}
+
+.navbar__brand {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+}
+
+.nav-link {
+    padding: $space-xs $space-sm;
+    border-radius: $radius-sm;
+    text-decoration: none;
+    color: $color-bg;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    border-color: $color-surface;
+    background: rgba(250, 248, 246, 0.12);
+}

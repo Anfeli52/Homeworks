@@ -1,5 +1,5 @@
+import type { NaryNodeDirectory, NaryNodeFile } from "../types/NaryNodeTypes";
 import { NaryNode } from "./NaryNode";
-import type { NaryNodeData } from "./NaryNode";
 
 export class NaryTree {
     root: NaryNode | null;
@@ -8,36 +8,37 @@ export class NaryTree {
         this.root = null;
     }
 
-    insert(data: NaryNodeData, parentId?: string) {
-        const newNode = new NaryNode(data);
-        if (!this.root) {
-            this.root = newNode;
-            return;
-        }
+    setRoot(value: NaryNodeDirectory | NaryNodeFile) {
+        this.root = new NaryNode(value);
+    }
 
-        if (!parentId) {
-            this.root.addChild(newNode);
-            return;
+    insert(parentId: string, value: NaryNodeDirectory | NaryNodeFile): boolean {
+        if (!this.root) {
+            return false;
         }
 
         const parentNode = this.findNode(this.root, parentId);
         if (!parentNode) {
-            throw new Error("No se encontró el nodo padre: " + parentId);
+            return false;
         }
 
+        const newNode = new NaryNode(value);
         parentNode.addChild(newNode);
+        return true;
     }
 
     private findNode(node: NaryNode, id: string): NaryNode | null {
-        if (node.id === id) {
+        if (node.value.id === id) {
             return node;
         }
+
         for (const child of node.children) {
             const found = this.findNode(child, id);
             if (found) {
                 return found;
             }
         }
+
         return null;
     }
 }

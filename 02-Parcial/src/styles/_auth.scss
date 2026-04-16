@@ -1,0 +1,72 @@
+//DISEÑO HECHO CON INTELIGENCIA ARTIFICIAL
+
+
+@use "./variables" as *;
+
+.auth-page {
+    min-height: calc(100vh - 68px);
+    display: grid;
+    place-items: center;
+    padding: $space-xl $space-md;
+}
+
+.auth-card {
+    width: min(460px, 100%);
+    background: $color-surface;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: $radius-lg;
+    box-shadow: $shadow-soft;
+    padding: $space-xl;
+}
+
+.auth-title {
+    font-size: 1.6rem;
+    margin-bottom: $space-xs;
+}
+
+.auth-subtitle {
+    color: $color-muted;
+    margin-bottom: $space-lg;
+}
+
+.auth-form {
+    display: grid;
+    gap: $space-md;
+}
+
+.form-group {
+    display: grid;
+    gap: $space-xs;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.input {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: $radius-sm;
+    background: $color-bg;
+    color: $color-text;
+    padding: 0.7rem 0.75rem;
+}
+
+.input:focus,
+.explorer-select:focus {
+    border-color: $color-primary;
+    outline: 2px solid rgba(2, 51, 52, 0.2);
+    outline-offset: 1px;
+}
+
+.alert {
+    border-radius: $radius-sm;
+    padding: 0.65rem 0.75rem;
+    margin-bottom: $space-md;
+}
+
+.alert-danger {
+    background: rgba(90, 99, 98, 0.15);
+    border: 1px solid rgba(90, 99, 98, 0.35);
+    color: $color-primary;
+}

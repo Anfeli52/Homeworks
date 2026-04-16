@@ -1,0 +1,34 @@
+//DISEÑO HECHO CON INTELIGENCIA ARTIFICIAL
+
+@use "./variables" as *;
+
+.btn {
+    border: 1px solid transparent;
+    border-radius: $radius-sm;
+    padding: 0.62rem 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: $color-primary;
+    color: $color-bg;
+}
+
+.btn-primary:hover {
+    background: #012728;
+}
+
+.btn-danger {
+    background: $color-text;
+    color: $color-bg;
+}
+
+.btn-danger:hover {
+    background: #1f1f1f;
+}
